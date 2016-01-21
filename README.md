@@ -2,7 +2,7 @@
 
 A basic prototype for setting menus, allowing users to specify an order and viewing a group or orders via Slack. Written in Java using Dropwizard.
 
-1. Get your Dropwizard server running.
+1. Get your Dropwizard server running - `java -jar slack-food-service-0.0.1-SNAPSHOT.jar server`.
 2. Ensure it is internet accessible via an https url (I used ngrok for testing).
 3. Set up a Slack slash command (e.g. /food) that will make requests to the server at https://your-server-host/food
 4. Manage meals hassle free via Slack.
