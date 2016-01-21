@@ -3,6 +3,7 @@ package ng.i.cann.s.food.menu;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -121,6 +122,11 @@ public class Menu {
 
 	public static void main(String[] args) throws Exception {
 
+		List<Menu> menus = new LinkedList<>();
+
+		/**
+		 * Yum Cha Noodle Haus
+		 */
 		Restaurant r = new Restaurant("Yum Cha Noodle Haus",
 				"Shop G25, Hilton Surfers Paradise, 3113 Surfers Paradise Blvd, Surfers Paradise QLD 4217", "(07) 5504 7667");
 
@@ -175,8 +181,45 @@ public class Menu {
 
 		Menu m = new Menu(r, items);
 
+		/**
+		 * Wok in a box
+		 */
+
+		Restaurant wokInABox = new Restaurant("Wok in a Box - Broadbeach", "4/2791 Gold Coast highway, Broadbeach QLD 4218", "(07) 5538 4813");
+		LinkedList<MenuItem> wokItems = new LinkedList<>();
+
+		wokItems.add(new MenuItem("1", "Satay Chicken", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("2", "Singapore Noodles", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("3", "Hot & Spicy Noodles", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("4", "Seafood Mee Goreng", new BigDecimal(13.95)));
+		wokItems.add(new MenuItem("5", "Beef & Black Bean", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("6", "Hokkien Mee", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("7", "Kwai Teow", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("8", "Pud Thai", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("9", "Sweet & Sour Pork", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("10", "Honey Soy Chicken with Cashews", new BigDecimal(13.95)));
+		wokItems.add(new MenuItem("11", "Thai Green Chicken Curry", new BigDecimal(13.95)));
+		wokItems.add(new MenuItem("12", "Teriyaki Beef", new BigDecimal(11.95)));
+		wokItems.add(new MenuItem("13", "Teriyaki Chicken", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("14", "Mongolian Beef", new BigDecimal(11.95)));
+		wokItems.add(new MenuItem("15", "Chicken with Chilli Basil", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("16", "Lemon Grass Chicken", new BigDecimal(11.95)));
+		wokItems.add(new MenuItem("17", "Special Friend Rice", new BigDecimal(11.95)));
+		wokItems.add(new MenuItem("18", "Seafood Nasi Goreng", new BigDecimal(13.95)));
+		wokItems.add(new MenuItem("19", "Nasi Goreng", new BigDecimal(12.95)));
+		wokItems.add(new MenuItem("20", "Teriyaki Chicken Bento", new BigDecimal(11.50)));
+		wokItems.add(new MenuItem("21", "Katsu Chicken Bento", new BigDecimal(12.50)));
+		wokItems.add(new MenuItem("22", "Combination Noodle Soup", new BigDecimal(10.95)));
+		wokItems.add(new MenuItem("23", "Chicken Laksa Soup", new BigDecimal(12.50)));
+		wokItems.add(new MenuItem("24", "Seafood Laksa Soup", new BigDecimal(13.50)));
+
+		Menu wokInABoxMenu = new Menu(wokInABox, wokItems);
+
+		menus.add(m);
+		menus.add(wokInABoxMenu);
+
 		ObjectMapper om = new ObjectMapper();
-		System.out.println(om.writeValueAsString(m));
+		System.out.println(om.writeValueAsString(menus));
 
 	}
 }
