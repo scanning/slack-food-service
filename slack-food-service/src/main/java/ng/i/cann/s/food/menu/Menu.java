@@ -204,7 +204,7 @@ public class Menu {
 		wokItems.add(new MenuItem("14", "Mongolian Beef", new BigDecimal(11.95)));
 		wokItems.add(new MenuItem("15", "Chicken with Chilli Basil", new BigDecimal(12.95)));
 		wokItems.add(new MenuItem("16", "Lemon Grass Chicken", new BigDecimal(11.95)));
-		wokItems.add(new MenuItem("17", "Special Friend Rice", new BigDecimal(11.95)));
+		wokItems.add(new MenuItem("17", "Special Fried Rice", new BigDecimal(11.95)));
 		wokItems.add(new MenuItem("18", "Seafood Nasi Goreng", new BigDecimal(13.95)));
 		wokItems.add(new MenuItem("19", "Nasi Goreng", new BigDecimal(12.95)));
 		wokItems.add(new MenuItem("20", "Teriyaki Chicken Bento", new BigDecimal(11.50)));
