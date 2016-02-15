@@ -8,6 +8,9 @@ public class SlackConfiguration {
 	private String token;
 	
 	public String getToken() {
+		if("XXXXXXXXXXXXXXXXXXXXXXXX".equals(token)) {
+			token = System.getenv("SLACK_TOKEN");
+		}
 		return token;
 	}
 	

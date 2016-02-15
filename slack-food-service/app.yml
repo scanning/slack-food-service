@@ -1,0 +1,7 @@
+server:
+  type: simple
+  applicationContextPath: /
+  rootPath: /*
+  connector:
+    type: http
+    
