@@ -94,11 +94,11 @@ public class FoodApplication extends Application<FoodApplicationConfiguration> {
 
 		log.info("Creating Mongo objects");
 		MongoDbConfiguration mongoConfig = configuration.getMongo();
-		MongoClientURI mongoUri = new MongoClientURI(mongoConfig.getURI());
-		MongoClient mongoClient = new MongoClient(mongoUri);
-		DB db = mongoClient.getDB(mongoConfig.getDbName());
-		
-		MongoManaged mongoManaged = new MongoManaged(mongoClient);
+		MongoClientURI uri = new MongoClientURI(mongoConfig.getURI());
+		MongoClient client = new MongoClient(uri);
+		DB db = client.getDB(uri.getDatabase());
+
+		MongoManaged mongoManaged = new MongoManaged(client);
 		environment.lifecycle().manage(mongoManaged);
 
 		log.info("Creating state objects");

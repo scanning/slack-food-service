@@ -37,6 +37,9 @@ public class MongoDbConfiguration {
 		sb.append(getPort());
 		sb.append("/");
 		sb.append(getDbName());
-		return sb.toString();
+		
+		String result = sb.toString();
+		System.out.println("Database connection URI is: " + result);
+		return result;
 	}
 }
