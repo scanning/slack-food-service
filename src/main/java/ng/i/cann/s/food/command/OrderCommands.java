@@ -5,17 +5,17 @@ import java.util.List;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.menu.MenuItem;
 import ng.i.cann.s.food.messages.Messages;
-import ng.i.cann.s.food.state.MenuStateReadOnly;
-import ng.i.cann.s.food.state.OrderState;
+import ng.i.cann.s.food.state.IMenuStateReadOnly;
+import ng.i.cann.s.food.state.IOrderState;
 
 public class OrderCommands extends Commands {
 
-	private final MenuStateReadOnly menuState;
-	private final OrderState orderState;
+	private final IMenuStateReadOnly menuState;
+	private final IOrderState orderState;
 	private final List<Menu> menus;
 	private final String username;
 
-	protected OrderCommands(List<Menu> menus, MenuStateReadOnly menuState, OrderState orderState, String username, String param) {
+	protected OrderCommands(List<Menu> menus, IMenuStateReadOnly menuState, IOrderState orderState, String username, String param) {
 		super(param);
 		this.menuState = menuState;
 		this.orderState = orderState;

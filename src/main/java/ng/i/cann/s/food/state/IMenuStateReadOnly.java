@@ -1,6 +1,6 @@
 package ng.i.cann.s.food.state;
 
-public interface MenuStateReadOnly {
+public interface IMenuStateReadOnly {
 	
 	public static final int DEFAULT_MENU_ID = -1;
 	

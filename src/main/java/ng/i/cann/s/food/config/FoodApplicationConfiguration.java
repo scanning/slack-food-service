@@ -9,11 +9,17 @@ import io.dropwizard.Configuration;
  *
  */
 public class FoodApplicationConfiguration extends Configuration {
-	
+
 	private SlackConfiguration slack = new SlackConfiguration();
-	
+
 	public SlackConfiguration getSlack() {
 		return slack;
+	}
+
+	private MongoDbConfiguration mongo = new MongoDbConfiguration();
+
+	public MongoDbConfiguration getMongo() {
+		return mongo;
 	}
 
 }

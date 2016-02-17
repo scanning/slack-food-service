@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import ng.i.cann.s.food.menu.Menu;
-import ng.i.cann.s.food.state.MenuState;
-import ng.i.cann.s.food.state.OrderState;
-import ng.i.cann.s.food.state.OrdersState;
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.IOrderState;
+import ng.i.cann.s.food.state.IOrdersState;
 
 public class CommandProcessor {
 
@@ -43,8 +43,8 @@ public class CommandProcessor {
 		}
 	}
 
-	public static String process(String[] args, List<Menu> menus, MenuState menuState, OrderState orderState, OrdersState ordersState, String username)
-			throws CommandProcessorException {
+	public static String process(String[] args, List<Menu> menus, IMenuState menuState, IOrderState orderState, IOrdersState ordersState,
+			String username) throws CommandProcessorException {
 
 		if (args == null || args.length < 1 || args.length > 3) {
 			throw new CommandProcessorException("Invalid usage.");

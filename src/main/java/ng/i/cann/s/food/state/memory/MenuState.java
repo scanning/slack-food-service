@@ -1,4 +1,7 @@
-package ng.i.cann.s.food.state;
+package ng.i.cann.s.food.state.memory;
+
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.IMenuStateReadOnly;
 
 /**
  * Contains all the menu state. This could be backed by some kind of persistent
@@ -7,7 +10,7 @@ package ng.i.cann.s.food.state;
  * @author scanning
  *
  */
-public class MenuState implements MenuStateReadOnly {
+public class MenuState implements IMenuState, IMenuStateReadOnly {
 
 	private int currentMenuId = DEFAULT_MENU_ID;
 

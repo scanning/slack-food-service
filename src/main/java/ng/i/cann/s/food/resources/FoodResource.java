@@ -14,9 +14,10 @@ import ng.i.cann.s.food.command.CommandProcessorException;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.messages.Messages;
 import ng.i.cann.s.food.slack.SlackConstants;
-import ng.i.cann.s.food.state.MenuState;
-import ng.i.cann.s.food.state.OrderState;
-import ng.i.cann.s.food.state.OrdersState;
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.IOrderState;
+import ng.i.cann.s.food.state.IOrdersState;
+import ng.i.cann.s.food.state.memory.MenuState;
 
 import com.codahale.metrics.annotation.Timed;
 
@@ -32,11 +33,11 @@ public class FoodResource {
 
 	private final List<Menu> menus;
 
-	private final MenuState menuState;
-	private final OrderState orderState;
-	private final OrdersState ordersState;
+	private final IMenuState menuState;
+	private final IOrderState orderState;
+	private final IOrdersState ordersState;
 
-	public FoodResource(List<Menu> menus, MenuState menuState, OrderState orderState, OrdersState ordersState) {
+	public FoodResource(List<Menu> menus, IMenuState menuState, IOrderState orderState, IOrdersState ordersState) {
 		this.menus = menus;
 		this.menuState = menuState;
 		this.orderState = orderState;

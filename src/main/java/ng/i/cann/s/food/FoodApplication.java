@@ -13,14 +13,18 @@ import java.util.Collections;
 import java.util.List;
 
 import ng.i.cann.s.food.config.FoodApplicationConfiguration;
+import ng.i.cann.s.food.config.MongoDbConfiguration;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.resources.FoodResource;
 import ng.i.cann.s.food.resources.MenuResource;
 import ng.i.cann.s.food.resources.OrderResource;
 import ng.i.cann.s.food.resources.OrdersResource;
-import ng.i.cann.s.food.state.MenuState;
-import ng.i.cann.s.food.state.OrderState;
-import ng.i.cann.s.food.state.OrdersState;
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.IOrderState;
+import ng.i.cann.s.food.state.IOrdersState;
+import ng.i.cann.s.food.state.mongo.MenuStateMongoImpl;
+import ng.i.cann.s.food.state.mongo.MongoManaged;
+import ng.i.cann.s.food.state.mongo.OrderStateMongoImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +35,9 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.common.io.Resources;
+import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 /**
  * The Slack food application.
@@ -78,17 +85,28 @@ public class FoodApplication extends Application<FoodApplicationConfiguration> {
 		URL menuUrl = Resources.getResource("menus.json");
 		try {
 			ObjectMapper om = new ObjectMapper();
-			ObjectReader or = om.readerFor(Menu.class);
+			ObjectReader or = om.reader(Menu.class);
 			MappingIterator<Menu> iter = or.readValues(menuUrl);
 			menus = iter.readAll();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 
+		log.info("Creating Mongo objects");
+		MongoDbConfiguration mongoConfig = configuration.getMongo();
+		MongoClientURI mongoUri = new MongoClientURI(mongoConfig.getURI());
+		MongoClient mongoClient = new MongoClient(mongoUri);
+		DB db = mongoClient.getDB(mongoConfig.getDbName());
+		
+		MongoManaged mongoManaged = new MongoManaged(mongoClient);
+		environment.lifecycle().manage(mongoManaged);
+
 		log.info("Creating state objects");
-		MenuState menuState = new MenuState();
-		OrderState orderState = new OrderState();
-		OrdersState ordersState = new OrdersState(orderState);
+		IMenuState menuState = new MenuStateMongoImpl(db);
+		OrderStateMongoImpl orderStateMongoImpl = new OrderStateMongoImpl(db);
+
+		IOrderState orderState = orderStateMongoImpl;
+		IOrdersState ordersState = orderStateMongoImpl;
 
 		log.info("Setting up menu resource");
 		MenuResource menuResource = new MenuResource(menus, menuState);
@@ -108,5 +126,4 @@ public class FoodApplication extends Application<FoodApplicationConfiguration> {
 
 		log.info("Initialization complete");
 	}
-
 }

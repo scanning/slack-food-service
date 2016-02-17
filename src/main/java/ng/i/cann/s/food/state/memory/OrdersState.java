@@ -1,13 +1,16 @@
-package ng.i.cann.s.food.state;
+package ng.i.cann.s.food.state.memory;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class OrdersState {
+import ng.i.cann.s.food.state.IOrderState;
+import ng.i.cann.s.food.state.IOrdersState;
 
-	private final OrderState orderState;
+public class OrdersState implements IOrdersState {
 
-	public OrdersState(OrderState orderState) {
+	private final IOrderState orderState;
+
+	public OrdersState(IOrderState orderState) {
 		this.orderState = orderState;
 	}
 

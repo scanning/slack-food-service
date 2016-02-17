@@ -1,9 +1,11 @@
-package ng.i.cann.s.food.state;
+package ng.i.cann.s.food.state.memory;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderState {
+import ng.i.cann.s.food.state.IOrderState;
+
+public class OrderState implements IOrderState {
 
 	private final Map<String, String> ordersByUsername = new HashMap<>();
 

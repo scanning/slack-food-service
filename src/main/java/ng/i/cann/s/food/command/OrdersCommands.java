@@ -11,16 +11,16 @@ import java.util.Set;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.menu.MenuItem;
 import ng.i.cann.s.food.messages.Messages;
-import ng.i.cann.s.food.state.MenuStateReadOnly;
-import ng.i.cann.s.food.state.OrdersState;
+import ng.i.cann.s.food.state.IMenuStateReadOnly;
+import ng.i.cann.s.food.state.IOrdersState;
 
 public class OrdersCommands extends Commands {
 
-	private final MenuStateReadOnly menuState;
-	private final OrdersState ordersState;
+	private final IMenuStateReadOnly menuState;
+	private final IOrdersState ordersState;
 	private final List<Menu> menus;
 
-	protected OrdersCommands(List<Menu> menus, MenuStateReadOnly menuState, OrdersState ordersState, String param) {
+	protected OrdersCommands(List<Menu> menus, IMenuStateReadOnly menuState, IOrdersState ordersState, String param) {
 		super(param);
 		this.menus = menus;
 		this.menuState = menuState;
@@ -69,26 +69,30 @@ public class OrdersCommands extends Commands {
 
 	@Override
 	public String doList() {
-		Menu currentMenu = menus.get(menuState.getCurrentMenuId() - 1);
-		Map<String, String> orders = ordersState.getOrders();
-		if (orders.size() > 0) {
-			BigDecimal finalPrice = new BigDecimal(0);
-			StringBuilder sb = new StringBuilder();
-			for (String user : orders.keySet()) {
-				String orderId = orders.get(user);
-				MenuItem menuItem = currentMenu.getItemById(orderId);
-				if (menuItem != null) {
-					sb.append(user + " ordered " + menuItem.getFormattedString());
-					sb.append(System.lineSeparator());
-					finalPrice = finalPrice.add(menuItem.getPrice());
+		if (menus != null && menus.size() > 0) {
+			Menu currentMenu = menus.get(menuState.getCurrentMenuId() - 1);
+			Map<String, String> orders = ordersState.getOrders();
+			if (orders.size() > 0) {
+				BigDecimal finalPrice = new BigDecimal(0);
+				StringBuilder sb = new StringBuilder();
+				for (String user : orders.keySet()) {
+					String orderId = orders.get(user);
+					MenuItem menuItem = currentMenu.getItemById(orderId);
+					if (menuItem != null) {
+						sb.append(user + " ordered " + menuItem.getFormattedString());
+						sb.append(System.lineSeparator());
+						finalPrice = finalPrice.add(menuItem.getPrice());
+					}
 				}
+				sb.append(Messages.FINAL_PRICE);
+				sb.append(NumberFormat.getCurrencyInstance().format(finalPrice));
+				sb.append(System.lineSeparator());
+				return sb.toString();
+			} else {
+				return Messages.NO_ORDERS_PLACED_YET;
 			}
-			sb.append(Messages.FINAL_PRICE);
-			sb.append(NumberFormat.getCurrencyInstance().format(finalPrice));
-			sb.append(System.lineSeparator());
-			return sb.toString();
 		} else {
-			return Messages.NO_ORDERS_PLACED_YET;
+			return Messages.NO_MENU_SET;
 		}
 	}
 

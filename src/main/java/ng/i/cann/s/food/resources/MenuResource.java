@@ -12,7 +12,8 @@ import javax.ws.rs.core.MediaType;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.messages.Messages;
 import ng.i.cann.s.food.slack.SlackConstants;
-import ng.i.cann.s.food.state.MenuState;
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.memory.MenuState;
 
 import com.codahale.metrics.annotation.Timed;
 
@@ -28,9 +29,9 @@ public class MenuResource {
 
 	private final List<Menu> menus;
 
-	private final MenuState menuState;
+	private final IMenuState menuState;
 
-	public MenuResource(List<Menu> menus, MenuState menuState) {
+	public MenuResource(List<Menu> menus, IMenuState menuState) {
 		this.menus = menus;
 		this.menuState = menuState;
 	}

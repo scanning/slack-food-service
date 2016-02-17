@@ -14,8 +14,8 @@ import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.menu.MenuItem;
 import ng.i.cann.s.food.messages.Messages;
 import ng.i.cann.s.food.slack.SlackConstants;
-import ng.i.cann.s.food.state.MenuStateReadOnly;
-import ng.i.cann.s.food.state.OrderState;
+import ng.i.cann.s.food.state.IMenuStateReadOnly;
+import ng.i.cann.s.food.state.IOrderState;
 
 import com.codahale.metrics.annotation.Timed;
 
@@ -29,11 +29,11 @@ import com.codahale.metrics.annotation.Timed;
 @Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {
 
-	private final MenuStateReadOnly menuState;
-	private final OrderState orderState;
+	private final IMenuStateReadOnly menuState;
+	private final IOrderState orderState;
 	private final List<Menu> menus;
 
-	public OrderResource(List<Menu> menus, OrderState orderState, MenuStateReadOnly menuState) {
+	public OrderResource(List<Menu> menus, IOrderState orderState, IMenuStateReadOnly menuState) {
 		this.menus = Collections.unmodifiableList(menus);
 		this.orderState = orderState;
 		this.menuState = menuState;
@@ -68,7 +68,7 @@ public class OrderResource {
 		System.out.println(text);
 		System.out.println(responseUrl);
 
-		if (menuState.getCurrentMenuId() == MenuStateReadOnly.DEFAULT_MENU_ID) {
+		if (menuState.getCurrentMenuId() == IMenuStateReadOnly.DEFAULT_MENU_ID) {
 			return Messages.NO_MENU_SET;
 		}
 

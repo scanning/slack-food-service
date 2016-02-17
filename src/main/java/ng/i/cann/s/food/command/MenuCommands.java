@@ -4,14 +4,15 @@ import java.util.List;
 
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.messages.Messages;
-import ng.i.cann.s.food.state.MenuState;
+import ng.i.cann.s.food.state.IMenuState;
+import ng.i.cann.s.food.state.memory.MenuState;
 
 public class MenuCommands extends Commands {
 
 	private final List<Menu> menus;
-	private final MenuState menuState;
+	private final IMenuState menuState;
 
-	public MenuCommands(List<Menu> menus, MenuState menuState, String param) {
+	public MenuCommands(List<Menu> menus, IMenuState menuState, String param) {
 		super(param);
 		this.menus = menus;
 		this.menuState = menuState;
