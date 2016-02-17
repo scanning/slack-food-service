@@ -29,7 +29,7 @@ public abstract class MongoImplBase<T extends StateBase> {
 	}
 
 	protected void removeAll() {
-		collection.removeById(getToday());
+		collection.remove(DBQuery.is(DAY_FIELD, getToday()));
 	}
 
 	protected T findOne() {
