@@ -2,9 +2,14 @@ package ng.i.cann.s.food.state.mongo;
 
 import java.util.Date;
 
+import org.mongojack.Id;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class StateBase {
+
+	@Id
+	private String id;
 
 	@JsonProperty
 	private Date day;
