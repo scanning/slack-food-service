@@ -10,8 +10,12 @@ public class OrderState extends StateBase {
 	@JsonProperty
 	private String orderId;
 
-	public OrderState(String username, String orderId) {
+	private OrderState() {
 		super();
+	}
+
+	public OrderState(String username, String orderId) {
+		this();
 		this.username = username;
 		this.orderId = orderId;
 	}

@@ -7,8 +7,12 @@ public class MenuState extends StateBase {
 	@JsonProperty
 	private int menuId;
 
-	public MenuState(int menuId) {
+	private MenuState() {
 		super();
+	}
+
+	public MenuState(int menuId) {
+		this();
 		this.menuId = menuId;
 	}
 
