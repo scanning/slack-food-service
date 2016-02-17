@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class MongoDbConfiguration {
 
 	public String getUsername() {
-		return System.getenv("MONGO_DB_USERNAME");
+		return System.getenv("MONGO_DB_USER");
 	}
 
 	public String getPassword() {
@@ -37,9 +37,6 @@ public class MongoDbConfiguration {
 		sb.append(getPort());
 		sb.append("/");
 		sb.append(getDbName());
-		
-		String result = sb.toString();
-		System.out.println("Database connection URI is: " + result);
-		return result;
+		return sb.toString();
 	}
 }
