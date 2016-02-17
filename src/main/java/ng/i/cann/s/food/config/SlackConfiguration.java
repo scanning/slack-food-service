@@ -6,12 +6,12 @@ public class SlackConfiguration {
 
 	@JsonProperty
 	private String token;
-	
+
 	public String getToken() {
-		if("XXXXXXXXXXXXXXXXXXXXXXXX".equals(token)) {
+		if (token == null) {
 			token = System.getenv("SLACK_TOKEN");
 		}
 		return token;
 	}
-	
+
 }

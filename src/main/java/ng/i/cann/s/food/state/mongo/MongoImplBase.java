@@ -10,20 +10,22 @@ import org.mongojack.DBCursor;
 import org.mongojack.DBQuery;
 import org.mongojack.JacksonDBCollection;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 
-public abstract class MongoImplBase<T> {
+public abstract class MongoImplBase<T extends StateBase> {
 
-	private static final String ID_FIELD = "_id";
+	private static final String DAY_FIELD = "day";
 
 	private final JacksonDBCollection<T, Date> collection;
 
 	protected MongoImplBase(DB db, String collectionName, Class<T> clazz) {
 		collection = JacksonDBCollection.wrap(db.getCollection(collectionName), clazz, Date.class);
+		getCollection().createIndex(new BasicDBObject(DAY_FIELD, 1));
 	}
 
 	protected void removeOneByIndex(String index, String value) {
-		collection.remove(DBQuery.is(ID_FIELD, getToday()).and(DBQuery.is(index, value)));
+		collection.remove(DBQuery.is(DAY_FIELD, getToday()).and(DBQuery.is(index, value)));
 	}
 
 	protected void removeAll() {
@@ -31,16 +33,16 @@ public abstract class MongoImplBase<T> {
 	}
 
 	protected T findOne() {
-		return collection.findOne(DBQuery.is(ID_FIELD, getToday()));
+		return collection.findOne(DBQuery.is(DAY_FIELD, getToday()));
 	}
 
 	protected T findOneByIndex(String index, String value) {
-		return collection.findOne(DBQuery.is(ID_FIELD, getToday()).and(DBQuery.is(index, value)));
+		return collection.findOne(DBQuery.is(DAY_FIELD, getToday()).and(DBQuery.is(index, value)));
 	}
 
 	protected List<T> findAll() {
 		List<T> result = new ArrayList<>();
-		DBCursor<T> all = collection.find(DBQuery.is(ID_FIELD, getToday()));
+		DBCursor<T> all = collection.find(DBQuery.is(DAY_FIELD, getToday()));
 		if (all != null && all.size() > 0) {
 			result = all.toArray();
 		}

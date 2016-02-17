@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 import ng.i.cann.s.food.config.FoodApplicationConfiguration;
-import ng.i.cann.s.food.config.MongoDbConfiguration;
+import ng.i.cann.s.food.config.MongoConfiguration;
 import ng.i.cann.s.food.menu.Menu;
 import ng.i.cann.s.food.resources.FoodResource;
 import ng.i.cann.s.food.resources.MenuResource;
@@ -93,7 +93,7 @@ public class FoodApplication extends Application<FoodApplicationConfiguration> {
 		}
 
 		log.info("Creating Mongo objects");
-		MongoDbConfiguration mongoConfig = configuration.getMongo();
+		MongoConfiguration mongoConfig = configuration.getMongo();
 		MongoClientURI uri = new MongoClientURI(mongoConfig.getURI());
 		MongoClient client = new MongoClient(uri);
 		DB db = client.getDB(uri.getDatabase());

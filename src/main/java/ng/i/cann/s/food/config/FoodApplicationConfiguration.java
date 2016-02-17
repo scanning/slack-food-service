@@ -16,9 +16,9 @@ public class FoodApplicationConfiguration extends Configuration {
 		return slack;
 	}
 
-	private MongoDbConfiguration mongo = new MongoDbConfiguration();
+	private MongoConfiguration mongo = new MongoConfiguration();
 
-	public MongoDbConfiguration getMongo() {
+	public MongoConfiguration getMongo() {
 		return mongo;
 	}
 
